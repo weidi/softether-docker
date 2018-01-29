@@ -1,6 +1,7 @@
+FROM alpine as builder
+
 LABEL version="0.1"
 
-FROM alpine as builder
 RUN mkdir /usr/local/src && apk update && apk add binutils \
         build-base \
         readline-dev \
