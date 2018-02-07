@@ -1,7 +1,5 @@
 FROM alpine as builder
 
-LABEL version="0.1"
-
 RUN mkdir /usr/local/src && apk update && apk add binutils \
         build-base \
         readline-dev \
@@ -12,7 +10,7 @@ RUN mkdir /usr/local/src && apk update && apk add binutils \
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 WORKDIR /usr/local/src
-RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git
+RUN git clone -b 'v4.24-9651-beta' https://github.com/SoftEtherVPN/SoftEtherVPN.git
 
 WORKDIR /usr/local/src/SoftEtherVPN
 
