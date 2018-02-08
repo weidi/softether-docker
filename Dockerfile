@@ -14,7 +14,7 @@ ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 WORKDIR /usr/local/src
 RUN git clone -b 'v4.25-9656-rtm' https://github.com/SoftEtherVPN/SoftEtherVPN_Stable.git
 
-WORKDIR /usr/local/src/SoftEtherVPN
+WORKDIR /usr/local/src/SoftEtherVPN_Stable
 
 RUN ./configure && make
 
