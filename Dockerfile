@@ -34,5 +34,6 @@ RUN ln -s /mnt/vpn_server.config vpn_server.config && \
         ln -s /mnt/lang.config lang.config
 COPY --from=builder /usr/local/src/SoftEtherVPN_Stable/bin/vpnserver .
 
+#Choose whatever you need to expose
 EXPOSE 443/tcp 992/tcp 1194/tcp 1194/udp 5555/tcp 500/udp 4500/udp
 CMD ["/root/vpnserver", "execsvc"]
