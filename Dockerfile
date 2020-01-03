@@ -12,11 +12,8 @@ RUN mkdir /usr/local/src && apk update && apk add binutils \
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 WORKDIR /usr/local/src
 RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git
-
-WORKDIR /usr/local/src/SoftEtherVPN
 ENV USE_MUSL YES
-RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git && \
-    cd SoftEtherVPN &&\
+RUN cd SoftEtherVPN &&\
 	git submodule update --init --recursive &&\
 	./configure &&\
 	make -C tmp 
@@ -33,7 +30,7 @@ RUN ln -s /mnt/vpn_server.config vpn_server.config && \
         mkdir /mnt/backup.vpn_server.config &&\
         ln -s /mnt/backup.vpn_server.config backup.vpn_server.config &&\
         ln -s /mnt/lang.config lang.config
-COPY --from=builder /usr/local/src/SoftEtherVPN/SoftEtherVPN/build .
+COPY --from=builder /usr/local/src/SoftEtherVPN/build .
 
 EXPOSE 443/tcp 992/tcp 1194/tcp 1194/udp 5555/tcp 500/udp 4500/udp
 CMD ["/root/vpnserver", "execsvc"]
