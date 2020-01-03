@@ -11,9 +11,34 @@ Available Tags
 
 `beta` release flagged as beta
 
-Usage
+Usage docker run
 --------
 
 This will keep your config and Logfiles in the docker volume `softetherdata`
 
 `docker run -d --rm --name softether-vpn-server -v softetherdata:/mnt -p 443:443/tcp -p 992:992/tcp -p 1194:1194/udp -p 5555:5555/tcp -p 500:500/udp -p 4500:4500/udp -p 1701:1701/udp --cap-add NET_ADMIN toprock/softether`
+
+Usage docker-compose
+--------
+The same command can be achieved by docker-compose
+```
+version: '3'
+services:
+  softethervpn:
+    image: toprock/softether
+    restart: always
+    ports:
+      - 443:443
+      - 992:992
+      - 1194:1194/udp
+      - 5555:5555
+      - 500:500/udp
+      - 4500:4500/udp
+      - 1701:1701/udp
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - softether_data:/mnt
+volumes:
+  softether_data:
+```
