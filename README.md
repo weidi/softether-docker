@@ -4,6 +4,9 @@ This container is designed to be as small as possible and host a SoftEther VPN S
 It´s based on Alpine so result is around 10MB!
 It´s based on the great work of [SoftEherVPN](https://github.com/SoftEtherVPN/SoftEtherVPN/)
 
+You will be unable to bridge to a physical Ethernet adapter as there is no inside a Container but SecureNAT and other stuff that doesn´t need physical L2 will work.
+
+
 Available Tags
 ---------
 `latest` most of the commits to development branch
