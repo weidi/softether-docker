@@ -2,6 +2,7 @@
 
 This container is designed to be as small as possible and host a SoftEther VPN Server
 It´s based on Alpine so result is around 10MB!
+It´s based on the great work of [SoftEherVPN](https://github.com/SoftEtherVPN/SoftEtherVPN/)
 
 Available Tags
 ---------
@@ -23,22 +24,28 @@ Usage docker-compose
 The same command can be achieved by docker-compose
 ```
 version: '3'
+version: '3'
+
 services:
-  softethervpn:
+  softether:
     image: toprock/softether
+    cap_add:
+      - NET_ADMIN
     restart: always
     ports:
-      - 443:443
+      - 53:53
+      - 444:443
       - 992:992
       - 1194:1194/udp
       - 5555:5555
       - 500:500/udp
       - 4500:4500/udp
       - 1701:1701/udp
-    cap_add:
-      - NET_ADMIN
     volumes:
-      - softether_data:/mnt
-volumes:
-  softether_data:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "./softether_data:/mnt"
+      - "./softether_log:/root/server_log"
+      - "./softether_packetlog:/root/packet_log"
+      - "./softether_securitylog:/root/security_log"
 ```
