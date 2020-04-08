@@ -9,11 +9,12 @@ You will be unable to bridge to a physical Ethernet adapter as there is no insid
 
 Available Tags
 ---------
-`latest` most of the commits to development branch
+[![](https://images.microbadger.com/badges/version/toprock/softether.svg)](https://microbadger.com/images/toprock/softether "Get your own version badge on microbadger.com") up to date commits to the development repository
 
-`stable` release flagged as stable
 
-`beta` release flagged as beta
+[![](https://images.microbadger.com/badges/version/toprock/softether:stable.svg)](https://microbadger.com/images/toprock/softether:stable "Get your own version badge on microbadger.com") release from stable repository 
+
+You can and should always specify your wanted version like `toprock/softether:5.01.9671` or `toprock/softether:4.32.9731`
 
 Usage docker run
 --------
@@ -27,11 +28,10 @@ Usage docker-compose
 The same command can be achieved by docker-compose
 ```
 version: '3'
-version: '3'
 
 services:
   softether:
-    image: toprock/softether
+    image: toprock/softether:5.01.9672
     cap_add:
       - NET_ADMIN
     restart: always
