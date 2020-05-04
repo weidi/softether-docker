@@ -1,5 +1,5 @@
 FROM alpine as builder
-ARG GIT_TAG=v4.34-9744-beta
+ARG GIT_TAG=v4.34-9745-beta
 
 RUN mkdir /usr/local/src && apk update && apk add binutils \
         build-base \
