@@ -16,7 +16,7 @@ ENV USE_MUSL YES
 RUN cd SoftEtherVPN &&\
 	git submodule update --init --recursive &&\
 	./configure &&\
-	make -C tmp 
+	make -C build
 
 FROM alpine
 RUN apk update && apk add readline \
