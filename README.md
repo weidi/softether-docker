@@ -23,9 +23,15 @@ This will keep your config and Logfiles in the docker volume `softetherdata`
 
 `docker run -d --rm --name softether-vpn-server -v softetherdata:/mnt -p 443:443/tcp -p 992:992/tcp -p 1194:1194/udp -p 5555:5555/tcp -p 500:500/udp -p 4500:4500/udp -p 1701:1701/udp --cap-add NET_ADMIN toprock/softether`
 
+### Use vpncmd
+
+With newer releases I include vpncmd directly in the container so you can use it to configure the vpnserver. First start the vpnserver with the given command. Then you can run:
+
+`docker exec -it softether-vpn-server vpncmd`
+
 Usage docker-compose
 --------
-The same command can be achieved by docker-compose
+The same command can be achieved by docker-compose, the docker compose file is in the repository
 ```
 version: '3'
 
