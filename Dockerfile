@@ -7,7 +7,8 @@ RUN mkdir /usr/local/src && apk update && apk add binutils \
         ncurses-dev \
         git \
 		cmake \
-		zlib-dev &&\
+		zlib-dev \
+		libsodium-dev &&\
 		apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
@@ -22,7 +23,8 @@ RUN cd SoftEtherVPN &&\
 
 FROM alpine
 RUN apk update && apk add readline \
-        openssl &&\
+        openssl \
+		libsodium &&\
         apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 ENV LD_LIBRARY_PATH /root
