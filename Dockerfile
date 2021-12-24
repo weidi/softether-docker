@@ -5,13 +5,15 @@ RUN mkdir /usr/local/src && apk update && apk add binutils \
         openssl-dev \
         ncurses-dev \
         git \
-		cmake \
-		zlib-dev &&\
-		apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted
+        cmake \
+        zlib-dev \
+        libsodium-dev \
+        gnu-libiconv
+#        apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 WORKDIR /usr/local/src
-RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git
+RUN git clone https://github.com/weidi/SoftEtherVPN.git
 ENV USE_MUSL YES
 RUN cd SoftEtherVPN &&\
 	git submodule update --init --recursive &&\
@@ -19,9 +21,11 @@ RUN cd SoftEtherVPN &&\
 	make -C build
 
 FROM alpine
-RUN apk update && apk add readline \
-        openssl &&\
-        apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted
+RUN apk update && apk add --no-cache readline \
+        openssl \
+        libsodium \
+        gnu-libiconv
+#        apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 ENV LD_LIBRARY_PATH /root
 ENV PATH="/root:${PATH}"
