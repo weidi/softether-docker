@@ -1,5 +1,5 @@
 FROM alpine as builder
-#ARG GIT_TAG=5.01.9674
+#ARG GIT_TAG=5.02.5180
 RUN mkdir /usr/local/src && apk update && apk add binutils \
         build-base \
         readline-dev \
@@ -13,11 +13,12 @@ RUN mkdir /usr/local/src && apk update && apk add binutils \
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 WORKDIR /usr/local/src
-RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git
-#RUN git clone -b ${GIT_TAG} https://github.com/SoftEtherVPN/SoftEtherVPN.git
-ENV USE_MUSL YES
+RUN git clone https://github.com/weidi/SoftEtherVPN.git
+#RUN git clone -b ${GIT_TAG} https://github.com/weidi/SoftEtherVPN.git
+ENV USE_MUSL=YES
 RUN cd SoftEtherVPN &&\
-	git submodule update --init --recursive &&\
+	git submodule init &&\
+	git submodule update &&\
 	./configure &&\
 	make -C build
 
