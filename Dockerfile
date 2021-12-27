@@ -1,20 +1,20 @@
 FROM alpine as builder
 #ARG GIT_TAG=5.02.5180
-RUN mkdir /usr/local/src && apk update && apk add binutils \
+RUN mkdir /usr/local/src && apk add binutils --no-cache\
         build-base \
         readline-dev \
         openssl-dev \
         ncurses-dev \
         git \
-		cmake \
-		zlib-dev \
-		libsodium-dev &&\
-		apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted
+        cmake \
+        zlib-dev \
+        libsodium-dev \
+        gnu-libiconv 
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 WORKDIR /usr/local/src
-RUN git clone https://github.com/weidi/SoftEtherVPN.git
-#RUN git clone -b ${GIT_TAG} https://github.com/weidi/SoftEtherVPN.git
+RUN git clone https://github.com/SoftEtherVPN/SoftEtherVPN.git
+#RUN git clone -b ${GIT_TAG} https://github.com/SoftEtherVPN/SoftEtherVPN.git
 ENV USE_MUSL=YES
 RUN cd SoftEtherVPN &&\
 	git submodule init &&\
@@ -23,10 +23,10 @@ RUN cd SoftEtherVPN &&\
 	make -C build
 
 FROM alpine
-RUN apk update && apk add readline \
+RUN apk add --no-cache readline \
         openssl \
-		libsodium &&\
-        apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community --allow-untrusted
+        libsodium \
+        gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so
 ENV LD_LIBRARY_PATH /root
 ENV PATH="/root:${PATH}"
