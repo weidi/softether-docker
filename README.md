@@ -1,3 +1,11 @@
+# This Project was moved to SoftetherVPN 
+
+https://github.com/SoftEtherVPN/SoftetherVPN-docker
+
+Please change your images to https://hub.docker.com/repository/docker/softethervpn/vpnserver
+
+
+
 # softether-docker
 
 This container is designed to be as small as possible and host a SoftEther VPN Server
